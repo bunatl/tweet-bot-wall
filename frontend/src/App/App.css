@@ -1,0 +1,70 @@
+/* whole body of the page */
+body{
+    font-family: Arial, Verdana, Helvetica, sans-serif, "Trebuchet MS";
+    background: lightgray;
+    margin: 0;
+}
+
+#root{
+    width: 80%;
+    max-width: 1440px;
+    min-height: 90vh;
+
+    background: gray;
+
+    /* center element */
+    /* allow some margin - otherwise 5vh */
+    margin: 4.5vh auto;
+    vertical-align: middle;
+
+    border: 2px solid white;
+    box-shadow: 0 0 15px 4px gray;
+}
+
+header h1{
+    text-align: center;
+    margin: 0;
+    padding: .25em 0 1em 0;
+    font-size: min(6vw, 2.5em);
+}
+
+main{
+    width: 100%;
+    min-height: 68vh;
+    text-align: center;
+}
+
+main #searchInput{
+    width: 70%;
+    padding: .5em;
+    height: 2em;
+    font-size: min( 3vw, 1.25em);
+    border-radius: .5em;
+    border: 1px solid lightgrey;
+}
+
+main #panel{
+    width: 70%;
+    margin: .5em auto 1em auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+footer{
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    line-height: 140%;
+    padding-top: .5em;
+
+    border-top: 1px solid black;
+}
+
+footer a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
