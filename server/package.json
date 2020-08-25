@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server side for tweet bot wall",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bunatl/tweet-bot-wall.git"
+  },
+  "keywords": [
+    "node.js",
+    "tweet-bot-wall",
+    "api"
+  ],
+  "author": "Lukas Bunat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bunatl/tweet-bot-wall/issues"
+  },
+  "homepage": "https://github.com/bunatl/tweet-bot-wall#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0"
+  },
+  "devDependencies": {
+    "helmet": "^4.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
