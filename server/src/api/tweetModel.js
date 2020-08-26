@@ -1,9 +1,9 @@
-// mongoose.Schema
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const requiredString = {
     // String is shorthand for {type: String}
-    String,
+    type: String,
     required: true
 };
 const requiredNumber = {
@@ -11,19 +11,20 @@ const requiredNumber = {
     required: true
 };
 
-const requiredDate = {
+const dateFormat = {
     type: Date,
-    required: true
+    default: Date.now(),
 };
 
-const Company = mongoose.model('Company',
+// mongoose.model(modelName ~ collection, schema)
+const TweetModel = mongoose.model('tweets',
     new Schema({
         title: requiredString,
         likes: requiredNumber,
         dislikes: requiredNumber,
-        date: requiredDate,
+        date: dateFormat,
         text: requiredString
     })
 );
 
-module.exports = Company;
+module.exports = TweetModel;

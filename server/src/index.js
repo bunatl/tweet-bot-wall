@@ -24,14 +24,11 @@ app.use(cors({
 app.use(express.json());
 
 /* == DB connection == */
-// do try and catch
-/*
-//DB connections
-mongoose.connect(process.env.URL_DB, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+const mongoose = require('mongoose');
+mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
-*/
 
 /* == Routing == */
 app.get('/', (req, res) => {
@@ -40,11 +37,8 @@ app.get('/', (req, res) => {
     });
 });
 
-
-
 const tweets = require('./api/tweet');
 app.use('/wall', tweets);
-
 
 const errorHandler = require('./errorHandler');
 //if no previous route corresponds
