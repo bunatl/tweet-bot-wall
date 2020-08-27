@@ -1,18 +1,32 @@
 import React from 'react';
+const axios = require('axios');
 
-function Newtweet ({ addPost }) {
-    const addNewTweet = (e) => {
-
+function Newtweet ({ propagateChange }) {
+    const addNewTweet = async e => {
         // prevent the form to be submitted
         e.preventDefault();
 
-        addPost({
-            title: e.target.newTweetTitle.value,
-            text: e.target.newTweetText.value,
-            date: new Date().toDateString()
-        });
-
         // send data to DB
+        try {
+            const response = await axios({
+                method: 'POST',
+                url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet/add`,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    title: e.target.newTweetTitle.value,
+                    likes: 0,
+                    dislikes: 0,
+                    text: e.target.newTweetText.value
+                }
+            });
+            // create a modal
+            console.log(response);
+            propagateChange();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

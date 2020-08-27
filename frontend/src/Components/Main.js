@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // import components
 import Tweet from '../Components/Tweet';
@@ -6,17 +6,27 @@ import NewTweet from '../Components/NewTweet';
 
 import './tweet.css';
 
+const axios = require('axios');
+
 function Main () {
-    const [ numOfTweets, setNumOfTweets ] = useState(0);
     const [ filter, setFilter ] = useState("");
+    const [ tweetsArray, setTweetsArray ] = useState([]);
+    const [ dataChanged, setDataChanged ] = useState(false);
     const [ showNewTweetTemplate, setShowNewTweetTemplate ] = useState(false);
 
-    const [ tweets, setTweets ] = useState([]);
-    const addNewtweet = x => {
-        setTweets([ ...tweets, x ]);
-        setNumOfTweets(numOfTweets + 1);
-        setShowNewTweetTemplate(false);
-    };
+    useEffect(() => {
+        async function getData () {
+            try {
+                const { data: { tweets } } = await axios.get(`${ process.env.REACT_APP_SERVER_URL }/wall`);
+                setTweetsArray(tweets);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getData();
+        // reset data change state
+        setDataChanged(false);
+    }, [ dataChanged ]);
 
     return (
         <main>
@@ -28,16 +38,16 @@ function Main () {
             ></input>
             {/* panel */ }
             <div id="panel">
-                <div>Showing { numOfTweets } tweets</div>
+                <div>Showing { tweetsArray.length } tweets</div>
                 <div onClick={ () => showNewTweetTemplate ? setShowNewTweetTemplate(false) : setShowNewTweetTemplate(true) }>
                     Add a new tweet
                 </div>
             </div>
             {/* Conditionally showing new tweet */ }
-            { showNewTweetTemplate ? <NewTweet addPost={ addNewtweet } /> : '' }
+            { showNewTweetTemplate ? <NewTweet propagateChange={ () => { setDataChanged(true); setShowNewTweetTemplate(false); } } /> : '' }
             {/* map - container of tweets */ }
             <div id="tweetsList">
-                { tweets
+                { tweetsArray
                     .filter(x => {
                         return (
                             x.title.toLowerCase().includes(filter.toLowerCase()) ||
@@ -45,7 +55,7 @@ function Main () {
                         );
                     })
                     .map((item, i) => (
-                        <Tweet key={ i } prop={ item } />
+                        <Tweet key={ i } prop={ item } propagateChange={ () => setDataChanged(true) } />
                     )) }
             </div>
         </main>

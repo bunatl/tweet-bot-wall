@@ -5,13 +5,13 @@ const router = Router();
 const Tweet = require('./tweetModel');
 
 router.get('/', async (req, res, next) => {
-    // find all documents
-    const allTweets = await Tweet.find({});
+    // find all documents(records)
+    const tweets = await Tweet.find({});
 
+    res.status(200);
     res.json({
-        text: "this will return all tweets in",
-        cors: "anyone",
-        tweets: allTweets
+        tweets,
+        msg: "All tweets has been retrieved from DB."
     });
 });
 
@@ -20,22 +20,44 @@ router.post('/tweet/add', (req, res, next) => {
     newTweet.save(error => {
         if (error)
             next(new Error(`Tweet does not have correct format at ${ req.originalUrl }`));
-        else
-            res.json({
-                msg: "Data are loaded into DB",
-                cors: "anyone",
-                data: "recieved"
-            });
-    });
 
+        res.status(200);
+        res.json({
+            msg: "Tweet has been successfully added to the DB.",
+            tweet: req.body
+        });
+    });
+});
+
+router.post('/tweet/update', (req, res, next) => {
+    // select ~ find, updated value, parameters, callback
+    Tweet.findByIdAndUpdate({ _id: req.body.id }, {
+        likes: req.body.likes,
+        dislikes: req.body.dislikes
+    }, { new: true }, (err, resDoc) => {
+        if (err)
+            next(new Error(`Tweet hasn't been deleted - ${ req.originalUrl }`));
+
+        res.status(200);
+        res.json({
+            msg: `Tweet with _id: ${ req.body.id } has been updated.`,
+            tweet: resDoc,
+            cors: "only front front end"
+        });
+    });
 });
 
 router.post('/tweet/delete', (req, res, next) => {
-    const payload = req.body;
-    Tweet.findByIdAndDelete(payload.id);
-    res.json({
-        text: "let delete tweet from db",
-        cors: "only front front end"
+    Tweet.findByIdAndDelete({ _id: req.body.id }, (err, resDoc) => {
+        if (err)
+            next(new Error(`Tweet hasn't been deleted - ${ req.originalUrl }`));
+
+        res.status(200);
+        res.json({
+            msg: `Tweet with _id: ${ req.body.id } has been deleted.`,
+            tweet: resDoc,
+            cors: "only front front end"
+        });
     });
 });
 
@@ -50,10 +72,9 @@ router.get('/tweet/:tweetID', checkTweetID, async (req, res, next) => {
     // Find the adventure with the given `id`, or `null` if not found
     const tweet = await Tweet.findById(req.params.tweetID).exec();
 
+    res.status(200);
     res.json({
-        text: "return single tweet",
-        cors: "anyone",
-        id: req.params.tweetID,
+        msg: "Tweet has been found!",
         tweet
     });
 });
