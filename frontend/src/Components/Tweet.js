@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Bootstrap 4 icons
 import ThumbsUp from '../Assets/img/thumbs-up.svg';
@@ -47,6 +47,8 @@ function Tweet ({ prop, propagateChange }) {
         }
     };
 
+    const formatDate = x => `${ x.slice(8, 10) }.${ x.slice(5, 7) }.${ x.slice(0, 4) } at ${ x.slice(11, 19) }`;
+
     return (
         <div className="tweet">
             <div className="tweetRow1">
@@ -63,7 +65,7 @@ function Tweet ({ prop, propagateChange }) {
                 </div>
             </div>
             <div className="tweetRow2">
-                <div className="tweetDate">{ prop.date }</div>
+                <div className="tweetDate">{ formatDate(prop.date) }</div>
                 <div className="tweetDelete" onClick={ delTweet }>Delete tweet</div>
             </div>
             <div className="tweetText">{ prop.text }</div>

@@ -18,7 +18,7 @@ function Main () {
         async function getData () {
             try {
                 const { data: { tweets } } = await axios.get(`${ process.env.REACT_APP_SERVER_URL }/wall`);
-                setTweetsArray(tweets);
+                setTweetsArray(tweets.reverse());
             } catch (error) {
                 console.error(error);
             }
