@@ -1,0 +1,21 @@
+footer{
+    width: 100%;
+    /* min-height: 10vh; */
+    text-align: center;
+    line-height: 145%;
+    padding-top: .5em;
+    font-size: unquote('min(4vw, 1em)');
+
+    border-top: 1px solid black;
+
+    a{
+        color: black;
+        text-decoration: none;
+        display: inline-block;
+
+        &:hover{
+            font-weight: bold;
+            transform: scale(1.05);
+        }
+    }
+}

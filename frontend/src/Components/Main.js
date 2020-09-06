@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Tweet from '../Components/Tweet';
 import NewTweet from '../Components/NewTweet';
 
-import './tweet.css';
-
 const axios = require('axios');
 
 function Main () {
@@ -27,6 +25,7 @@ function Main () {
         // reset data change state
         setDataChanged(false);
     }, [ dataChanged ]);
+
 
     return (
         <main>

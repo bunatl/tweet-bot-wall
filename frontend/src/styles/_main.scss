@@ -1,0 +1,55 @@
+main{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1em;
+    text-align: center;
+
+    $control-width: 90%;
+    #searchInput{
+        width: $control-width;
+        padding: .5em;
+        height: 2em;
+        font-size: unquote('min(3vw, 1.25em)');
+        border-radius: .5em;
+        border: 1px solid lightgrey;
+    }
+
+    #panel{
+        @include flex(row, nowrap, space-between);
+        width: $control-width;
+        margin: .5em auto 1em auto;
+
+        > div{
+            width: 50%;
+            max-width: 12.5em;
+            min-height: 2em;
+            line-height: 2em;
+            font-size: unquote('min(3.5vw, 1.315em)');
+
+            /* Tweets counter */
+            &:first-child{
+                text-align: left;
+            }
+
+            &:last-child{
+                border-radius: .35em;
+                background: white;
+                border: 2px solid darkgray;
+
+                &:hover{
+                    cursor: pointer;
+                    background: darkgray;
+                    border: 2px solid white;
+                }
+            }
+        }
+    }
+    @media only screen and (min-width: $tablet-width) {
+        $control-width: 70%;
+
+        #searchInput,
+        #panel{
+            width: $control-width;
+        }
+    }
+}

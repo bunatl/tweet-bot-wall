@@ -53,6 +53,9 @@ function Tweet ({ prop, propagateChange }) {
         <div className="tweet">
             <div className="tweetRow1">
                 <div className="tweetTitle">{ prop.title }</div>
+                <div className="tweetDate">{ formatDate(prop.date) }</div>
+            </div>
+            <div className="tweetRow2">
                 <div className="tweetLikes">
                     <div onClick={ () => updateTweet('likes') }>
                         { prop.likes }
@@ -63,9 +66,6 @@ function Tweet ({ prop, propagateChange }) {
                         <img src={ ThumbsDown } alt="ThumbsDownCount"></img>
                     </div>
                 </div>
-            </div>
-            <div className="tweetRow2">
-                <div className="tweetDate">{ formatDate(prop.date) }</div>
                 <div className="tweetDelete" onClick={ delTweet }>Delete tweet</div>
             </div>
             <div className="tweetText">{ prop.text }</div>

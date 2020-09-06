@@ -1,0 +1,40 @@
+// variables
+@mixin flex($direction, $wrap, $content){
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $content;
+}
+$content-max-width: 1440px;
+$tablet-width: 768px;
+
+// other imports
+@import './main';
+@import './newTweet';
+@import './tweet';
+@import './footer';
+
+/* whole body of the page */
+body{
+    font-family: Arial, Verdana, Helvetica, sans-serif, "Trebuchet MS";
+    background: lightgray;
+    margin: 0;
+}
+
+#root{
+    width: 80%;
+    max-width: $content-max-width;
+    /* 2 * 2px for border lines */
+    min-height: calc( 100vh - 4px);
+    margin: 0 auto;
+    
+    background: gray;
+    border: 2px solid lightgray;
+    box-shadow: 0 0 15px 4px gray;
+}
+
+header h1{
+    text-align: center;
+    margin: 0;
+    font-size: unquote('min(10vw, 3em)');
+}

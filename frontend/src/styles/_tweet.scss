@@ -1,0 +1,109 @@
+.tweet{
+    @include flex(row, wrap, space-around);
+    row-gap: .3em;
+    border-radius: .5em;
+    border: 1px solid white;
+    background: lightgray;
+
+    width: 85%;
+    margin: 0 auto 2em auto;
+    padding: .65em;
+
+    @media screen and (min-width: $tablet-width) {
+        width: 66%;
+        padding: 1.25em;
+        row-gap: 1em;
+    }
+    
+    .tweetRow1{
+        @include flex(column, nowrap, flex-start);
+        row-gap: .25em;
+        width: 100%;
+        text-align: left;
+
+        @media screen and (min-width: $tablet-width) {
+            width: 50%;
+        }
+        
+        .tweetTitle{
+            font-size: unquote('min(6vw, 1.5em)');
+            font-weight: bold;
+        }
+
+        .tweetDate{
+            font-style: italic;
+            font-size: unquote('min(4vw, 1.05em)');
+        }
+    }
+
+    .tweetRow2{
+        @include flex(row, nowrap, space-between);
+        row-gap: .25em;
+        width: 100%;
+        
+        @media screen and (min-width: $tablet-width) {
+            @include flex(column, nowrap, flex-start);
+            width: 50%;
+        }
+
+        .tweetLikes{
+            @include flex(row, nowrap, flex-end);
+            /* vertical align */
+            align-items: center;
+            
+            // likes and dislikes div
+            > div{
+                font-size: unquote('min(4vw, 1.1em)');
+                padding: 0 .5em;
+
+                &:hover{
+                    cursor: pointer;
+                    transform: scale(1.2);
+                }
+
+                > img{
+                    height: 1em;
+                    margin-left: .5em;
+                }
+
+            }
+        }
+
+        .tweetDelete{
+            background: #b61c1c;
+            border: 1px solid black;
+            border-radius: .2em;
+            font-weight: bold;
+            font-size: unquote('min(4vw, 1.1em)');
+            padding: .25em;
+            width: 100%;
+            max-width: 8em;
+            box-sizing: border-box;
+            // float right: https://stackoverflow.com/questions/7693224/how-do-i-right-align-div-elements
+            margin-left: auto;
+            margin-right: 0;
+
+            &:hover{
+                background: firebrick;
+                color: floralwhite;
+                cursor: pointer;
+                border: 1px solid floralwhite;
+            }
+        }
+    }
+
+    .tweetText{
+        text-align: justify;
+        width: 100%;
+        word-wrap: break-word;
+        font-size: unquote('min(4.5vw, 1.15em)');
+    }
+}
+
+
+
+
+
+
+
+
