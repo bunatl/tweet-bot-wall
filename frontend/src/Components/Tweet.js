@@ -21,7 +21,6 @@ function Tweet ({ prop, propagateChange }) {
                     dislikes: toUpdate === "dislikes" ? prop.dislikes + 1 : prop.dislikes
                 }
             });
-            console.log(response);
             propagateChange();
         } catch (error) {
             console.error(error);
@@ -31,8 +30,8 @@ function Tweet ({ prop, propagateChange }) {
     const delTweet = async () => {
         try {
             const response = await axios({
-                method: 'POST',
-                url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet/delete`,
+                method: 'DELETE',
+                url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet`,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -40,7 +39,6 @@ function Tweet ({ prop, propagateChange }) {
                     id: prop._id
                 }
             });
-            console.log(response);
             propagateChange();
         } catch (error) {
             console.error(error);

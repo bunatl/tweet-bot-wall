@@ -21,8 +21,6 @@ function Newtweet ({ propagateChange }) {
                     text: e.target.newTweetText.value
                 }
             });
-            // create a modal
-            console.log(response);
             propagateChange();
         } catch (error) {
             console.error(error);
