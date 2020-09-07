@@ -31,6 +31,9 @@ body{
     background: gray;
     border: 2px solid lightgray;
     box-shadow: 0 0 15px 4px gray;
+
+    // to strech main tag and push footer to the bottom of the page
+    @include flex(column, nowrap, space-between);
 }
 
 header h1{

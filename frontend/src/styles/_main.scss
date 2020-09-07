@@ -1,5 +1,7 @@
 main{
     width: 100%;
+    // allow grow
+    flex-grow: 1;
     box-sizing: border-box;
     padding: 1em;
     text-align: center;
@@ -46,17 +48,24 @@ main{
     }
 
     #spinner{
-        width: 60%;
-        max-width: 15em;
+        width: 40%;
+        max-width: 8em;
+        margin-top: 12.5vh;
         animation-name: spin;
         animation-duration: 2s;
         animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out; 
+        animation-timing-function: ease-in-out;
     }
 
     @keyframes spin {
-        from { transform: rotate(0deg) }
-        to { transform: rotate(360deg) }
+        from { 
+            transform: rotate(0deg);
+            opacity: .75;
+        }
+        to { 
+            transform: rotate(360deg);
+            opacity: 1;
+        }
     }
 
     @media only screen and (min-width: $tablet-width) {

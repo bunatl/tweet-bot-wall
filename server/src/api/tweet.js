@@ -15,6 +15,24 @@ router.get('/', async (req, res, next) => {
     });
 });
 
+const checkTweetID = (req, res, next) => {
+    if (req.params.tweetID.lenght < 20)
+        next(new Error(`String- ${ req.originalUrl }`));
+
+    next();
+};
+
+router.get('/tweet/:tweetID', checkTweetID, async (req, res, next) => {
+    // Find the adventure with the given `id`, or `null` if not found
+    const tweet = await Tweet.findById(req.params.tweetID).exec();
+
+    res.status(200);
+    res.json({
+        msg: "Tweet has been found!",
+        tweet
+    });
+});
+
 router.post('/tweet/add', (req, res, next) => {
     const newTweet = new Tweet(req.body);
     newTweet.save(error => {
@@ -47,7 +65,7 @@ router.post('/tweet/update', (req, res, next) => {
     });
 });
 
-router.post('/tweet/delete', (req, res, next) => {
+router.delete('/tweet', (req, res, next) => {
     Tweet.findByIdAndDelete({ _id: req.body.id }, (err, resDoc) => {
         if (err)
             next(new Error(`Tweet hasn't been deleted - ${ req.originalUrl }`));
@@ -58,24 +76,6 @@ router.post('/tweet/delete', (req, res, next) => {
             tweet: resDoc,
             cors: "only front front end"
         });
-    });
-});
-
-const checkTweetID = (req, res, next) => {
-    if (req.params.tweetID.lenght < 20)
-        next(new Error(`String- ${ req.originalUrl }`));
-
-    next();
-};
-
-router.get('/tweet/:tweetID', checkTweetID, async (req, res, next) => {
-    // Find the adventure with the given `id`, or `null` if not found
-    const tweet = await Tweet.findById(req.params.tweetID).exec();
-
-    res.status(200);
-    res.json({
-        msg: "Tweet has been found!",
-        tweet
     });
 });
 
