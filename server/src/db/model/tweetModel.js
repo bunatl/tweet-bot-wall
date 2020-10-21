@@ -13,7 +13,7 @@ const requiredNumber = {
 
 const dateFormat = {
     type: Date,
-    default: Date.now(),
+    default: Date.now()
 };
 
 // mongoose.model(modelName ~ collection, schema)

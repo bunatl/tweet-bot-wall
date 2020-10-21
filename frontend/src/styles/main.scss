@@ -1,18 +1,5 @@
-// variables
-@mixin flex($direction, $wrap, $content){
-    display: flex;
-    flex-direction: $direction;
-    flex-wrap: $wrap;
-    justify-content: $content;
-}
-$content-max-width: 1440px;
-$tablet-width: 768px;
-
-// other imports
-@import './main';
-@import './newTweet';
-@import './tweet';
-@import './footer';
+@import './abstract/general';
+@import './components/general';
 
 /* whole body of the page */
 body{

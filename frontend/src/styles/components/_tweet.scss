@@ -19,10 +19,11 @@
         @include flex(column, nowrap, flex-start);
         row-gap: .25em;
         width: 100%;
-        text-align: left;
-
+        text-align: center;
+        
         @media screen and (min-width: $tablet-width) {
             width: 50%;
+            text-align: left;
         }
         
         .tweetTitle{

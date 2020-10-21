@@ -4,12 +4,13 @@ import React from 'react';
 import ThumbsUp from '../Assets/img/thumbs-up.svg';
 import ThumbsDown from '../Assets/img/thumbs-down.svg';
 
+import { formatDate } from '../utils/date';
 const axios = require('axios');
 
-function Tweet ({ prop, propagateChange }) {
+const Tweet = ({ prop, propagateChange }) => {
     const updateTweet = async (toUpdate) => {
         try {
-            const response = await axios({
+            await axios({
                 method: 'POST',
                 url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet/update`,
                 headers: {
@@ -27,25 +28,17 @@ function Tweet ({ prop, propagateChange }) {
         }
     };
 
-    const delTweet = async () => {
+    const delTweet = async (tweetID) => {
         try {
-            const response = await axios({
+            await axios({
                 method: 'DELETE',
-                url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet`,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    id: prop._id
-                }
+                url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet/${ tweetID }`
             });
             propagateChange();
         } catch (error) {
             console.error(error);
         }
     };
-
-    const formatDate = x => `${ x.slice(8, 10) }.${ x.slice(5, 7) }.${ x.slice(0, 4) } at ${ x.slice(11, 19) }`;
 
     return (
         <div className="tweet">
@@ -64,11 +57,11 @@ function Tweet ({ prop, propagateChange }) {
                         <img src={ ThumbsDown } alt="ThumbsDownCount"></img>
                     </div>
                 </div>
-                <div className="tweetDelete" onClick={ delTweet }>Delete tweet</div>
+                <div className="tweetDelete" onClick={ () => delTweet(prop._id) }>Delete tweet</div>
             </div>
             <div className="tweetText">{ prop.text }</div>
         </div>
     );
-}
+};
 
 export default Tweet;

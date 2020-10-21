@@ -1,23 +1,13 @@
 # Tweet bot wall
-The tweet bot wall is an online tool that allows unregistered users to post their tweets on a public tweet wall. Tweets are pernametly stored in a DB (tweet wall).
 
 ## Description
-- Public can tweet any tweet on the public tweet bot wall where will be all tweets stored.
-- Tweets can be filtered or removed
-- Each tweet can be liked or dislikes
-
-## State
-- ✅ Frontend
-- ❌ Backend API
-
-## Purpose
-This MERN application has been developed to support practical part of my diploma thesis at University of Economics in Prague.
+Tweet bot wall allows to any user post their tweets on app's wall. On the wall, tweets are pernametly stored in a DB (tweet wall). All tweets can be liked, disliked and also pernametly deleted.
 
 ## Hosting
-- Frontend part of the MERN app is hosted on [tweet.techis.fun](https://tweet.techis.fun)
+App is avaiable on [tweet-bot-wall.techis.fun](https://tweet-bot-wall.techis.fun) hosted on my VPS.
 
 ## Demo
-![frontend demo](demo.gif)
+![demo](demo.gif)
 
 ## Author
 Lukas Bunat

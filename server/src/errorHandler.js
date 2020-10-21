@@ -1,4 +1,3 @@
-
 const notFound = ((req, res, next) => {
     res.status(404);
 
@@ -11,7 +10,7 @@ const errors = ((error, req, res, next) => {
     res.status(res.statusCode === 200 ? 500 : res.statusCode);
     res.json({
         message: error.message,
-        stack: process.env.PRODUCTION === 1 ? '🐱‍👤' : error.stack
+        stack: process.env.PRODUCTION === "dev" ? error.stack : '🐱‍👤'
     });
 });
 

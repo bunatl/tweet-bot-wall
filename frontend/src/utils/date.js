@@ -1,0 +1,1 @@
+export const formatDate = x => `${ x.slice(8, 10) }.${ x.slice(5, 7) }.${ x.slice(0, 4) } at ${ x.slice(11, 19) }`;

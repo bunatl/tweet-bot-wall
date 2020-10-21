@@ -8,7 +8,7 @@ function Newtweet ({ propagateChange }) {
 
         // send data to DB
         try {
-            const response = await axios({
+            await axios({
                 method: 'POST',
                 url: `${ process.env.REACT_APP_SERVER_URL }/wall/tweet/add`,
                 headers: {
@@ -28,7 +28,7 @@ function Newtweet ({ propagateChange }) {
     };
 
     return (
-        <form id="newTweet" onSubmit={ addNewTweet }>
+        <form id="newTweet" onSubmit={ () => addNewTweet }>
             <input
                 type="text"
                 name="newTweetTitle"

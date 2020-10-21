@@ -1,10 +1,10 @@
 import React from 'react';
 
 // components
-import Main from '../Components/Main';
-import Footer from '../Components/Footer';
+import Main from './Main';
+import Footer from './Footer';
 
-import '../styles/styles.scss';
+import '../styles/main.scss';
 
 function App () {
   return (

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 // import components
-import Tweet from '../Components/Tweet';
-import NewTweet from '../Components/NewTweet';
+import Tweet from './Tweet';
+import NewTweet from './NewTweet';
 
 import spinnerSvg from '../Assets/img/spinner.svg';
 
 const axios = require('axios');
 
-function Main () {
+const Main = () => {
     const [ filter, setFilter ] = useState("");
     const [ loading, setLoading ] = useState(false);
     const [ tweetsArray, setTweetsArray ] = useState([]);
@@ -16,16 +16,17 @@ function Main () {
     const [ showNewTweetTemplate, setShowNewTweetTemplate ] = useState(false);
 
     useEffect(() => {
-        async function getData () {
+        const getData = async () => {
             try {
                 setLoading(true);
                 const { data: { tweets } } = await axios.get(`${ process.env.REACT_APP_SERVER_URL }/wall`);
+                // display latest added as first
                 setTweetsArray(tweets.reverse());
                 setLoading(false);
             } catch (error) {
                 console.error(error);
             }
-        }
+        };
         getData();
         // reset data change state
         setDataChanged(false);
@@ -51,20 +52,18 @@ function Main () {
             { showNewTweetTemplate ? <NewTweet propagateChange={ () => { setDataChanged(true); setShowNewTweetTemplate(false); } } /> : '' }
             {/* map - container of tweets */ }
             <div id="tweetsList">
-                { loading ? <img id="spinner" src={ spinnerSvg }></img>
+                { loading ? <img id="spinner" src={ spinnerSvg } alt="spinner"></img>
                     : tweetsArray
-                        .filter(x => {
-                            return (
-                                x.title.toLowerCase().includes(filter.toLowerCase()) ||
-                                x.text.toLowerCase().includes(filter.toLowerCase())
-                            );
-                        })
+                        .filter(x => (
+                            x.title.toLowerCase().includes(filter.toLowerCase()) ||
+                            x.text.toLowerCase().includes(filter.toLowerCase())
+                        ))
                         .map((item, i) => (
                             <Tweet key={ i } prop={ item } propagateChange={ () => setDataChanged(true) } />
                         )) }
             </div>
         </main>
     );
-}
+};
 
 export default Main;
