@@ -2,7 +2,7 @@ import React from 'react';
 const axios = require('axios');
 
 function Newtweet ({ propagateChange }) {
-    const addNewTweet = async e => {
+    const addNewTweet = async (e) => {
         // prevent the form to be submitted
         e.preventDefault();
 
@@ -28,7 +28,7 @@ function Newtweet ({ propagateChange }) {
     };
 
     return (
-        <form id="newTweet" onSubmit={ () => addNewTweet }>
+        <form id="newTweet" onSubmit={ (e) => addNewTweet(e) }>
             <input
                 type="text"
                 name="newTweetTitle"

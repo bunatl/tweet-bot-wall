@@ -2,10 +2,10 @@
   "name": "tweet-bot-wall-backend",
   "version": "1.0.0",
   "description": "Server side for tweet bot wall",
-  "main": "src/index.js",
+  "main": "src/tweet-bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/tweet-bot.js"
   },
   "repository": {
     "type": "git",

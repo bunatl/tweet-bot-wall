@@ -1,15 +1,15 @@
 const { Router } = require("express");
 const router = Router();
+const mongoose = require('mongoose');
 
 // previously defined tweet model
 const Tweet = require('../db/model/tweetModel');
-const connectDB = require('../db/db');
 
-connectDB();
 router.get('/', async (req, res, next) => {
     try {
         // find all documents(records)
         const tweets = await Tweet.find({});
+        mongoose.connection.close();
 
         res.status(200);
         res.json({
@@ -22,7 +22,6 @@ router.get('/', async (req, res, next) => {
 });
 
 const checkTweetID = (req, res, next) => next(req.params.tweetID.lenght < 20 ? new Error(`String- ${ req.originalUrl }`) : '');
-
 router.get('/tweet/:tweetID', checkTweetID, async (req, res, next) => {
     try {
         // Find the adventure with the given `id`, or `null` if not found
@@ -47,6 +46,7 @@ router.post('/tweet/add', async (req, res, next) => {
             msg: "Tweet has been successfully added to the DB.",
             tweet: req.body
         });
+        mongoose.connection.close();
     } catch (err) {
         next(new Error(`Tweet does not have correct format at ${ req.originalUrl }`));
     }

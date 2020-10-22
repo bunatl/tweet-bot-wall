@@ -32,7 +32,6 @@ const Main = () => {
         setDataChanged(false);
     }, [ dataChanged ]);
 
-
     return (
         <main>
             {/* search */ }
